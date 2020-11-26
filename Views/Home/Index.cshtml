@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+@if (Session["loggedUser"] == null)
+{
+    <div class="row">
+        <div class="col-md-4">
+            <h2>Please login</h2>
+            <p>
+                In order to use our services please log into your account.
+            </p>
+            <a class="btn btn-primary" href="/Home/Login" role="button">Login</a>
+        </div>
+    </div>
+}
+else
+{ 
+    //Тук сложете какво ще вижда юзъра след като се логне в акаунта !!! Горе не го пипайте.
+
+}
