@@ -11,10 +11,15 @@ namespace PraktikaProject.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class Task
     {
+        [DisplayName("Task description:")]
         public int TaskId { get; set; }
         public string TaskDescr { get; set; }
+        [NotMapped]
+        public List<Task> TaskCollection { get; set; }
     }
 }

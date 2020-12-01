@@ -11,7 +11,12 @@ namespace PraktikaProject.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            Task task = new Task();
+            using (TasksDBEntities db = new TasksDBEntities())
+            {
+                task.TaskCollection = db.Tasks.ToList<Task>();
+            }
+            return View(task);
         }
         [HttpGet]
         public ActionResult Login()

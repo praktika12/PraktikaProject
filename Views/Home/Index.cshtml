@@ -1,4 +1,5 @@
-﻿@{
+﻿@model PraktikaProject.Models.Task
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -15,7 +16,83 @@
     </div>
 }
 else
-{ 
-    //Тук сложете какво ще вижда юзъра след като се логне в акаунта !!! Горе не го пипайте.
+{
+    <div class="row">
+        <h3>Task List</h3>
+        <p1>
+            Choose a task from the dropdown list and press the "Begin task" button.
+        </p1>
+        <br /><br />
+        <div class="stopwatch">Time elapsed: 0h::0m::0s::0ms</div>
+        <div>
+            @Html.DisplayNameFor(model => model.TaskId)
+            @Html.DropDownListFor(model => model.TaskId, new SelectList(Model.TaskCollection, "TaskID", "TaskDescr"))
+        </div>
+        <br /><br />
+        
+        <div class="controller">
+            <button id="startBTN" onclick="start()" >Begin task</button>
+            <button id="pauseBTN" onclick="pause()" disabled>Pause task</button>
+            <button id="continueBTN" onclick="start()" disabled>Continue task</button>
+            <button id="finishBTN" onclick="finish()" disabled>Finish task</button>
+        </div>
+        <script type="text/javascript">
+            var h = 0, m = 0, s = 0, ms = 0;
+            var timer;
+            var stopwatchEL = document.querySelector('.stopwatch');
+            function start() {
+                timer = setInterval(run, 10);
+                document.getElementById("pauseBTN").removeAttribute('disabled')
+                document.getElementById("finishBTN").removeAttribute('disabled')
+                document.getElementById("startBTN").setAttribute('disabled', true)
+                document.getElementById("continueBTN").setAttribute('disabled', true)
+            }
+
+            function run() {
+                stopwatchEL.textContent = "Time elapsed: " + h + "h::" + m + "m::" + s + "s::" + ms + "ms";
+                ms++
+                if (ms == 100) {
+                    ms = 0;
+                    s++;
+                }
+                if (s == 60) {
+                    s = 0;
+                    m++;
+                }
+                if (m == 60) {
+                    m = 0;
+                    h++;
+                }
+            }
+
+            function pause() {
+                clearInterval(timer);
+                timer = false;
+                document.getElementById("continueBTN").removeAttribute('disabled')
+                document.getElementById("finishBTN").removeAttribute('disabled')
+                document.getElementById("pauseBTN").setAttribute('disabled', true)
+                document.getElementById("startBTN").setAttribute('disabled', true)
+            }
+
+            function restart() {
+                finish();
+                start();
+            }
+
+            function finish() {
+                clearInterval(timer);
+                timer = false;
+                ms = 0;
+                s = 0;
+                m = 0;
+                h = 0;
+                stopwatchEL.textContent = "Time elapsed: " + h + "h::" + m + "m::" + s + "s::" + ms + "ms";
+                document.getElementById("startBTN").removeAttribute('disabled')
+                document.getElementById("pauseBTN").setAttribute('disabled', true)
+                document.getElementById("continueBTN").setAttribute('disabled', true)
+                document.getElementById("finishBTN").setAttribute('disabled', true)
+            }
+        </script>
+    </div>
 
 }
