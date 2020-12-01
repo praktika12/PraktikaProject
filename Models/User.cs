@@ -20,7 +20,7 @@ namespace PraktikaProject.Models
         public string username { get; set; }
         [Required(ErrorMessage = "This field is required")]
         public string password { get; set; }
-        public Nullable<bool> isAdmin { get; set; }
+        public bool isAdmin { get; set; }
         public string LoginErrorMessage { get; set; }
     }
 }

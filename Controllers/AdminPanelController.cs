@@ -105,7 +105,14 @@ namespace PraktikaProject.Controllers
         public ActionResult addUser(User currentRequestToAdd)
         {
             WTDBE.Users.Add(currentRequestToAdd);
-            WTDBE.SaveChanges();
+            if (currentRequestToAdd.username != null && currentRequestToAdd.password != null)
+            {
+                WTDBE.SaveChanges();
+            }
+            else
+            {
+                return View();
+            }
             return RedirectToAction("Index", "AdminPanel");
         }
 

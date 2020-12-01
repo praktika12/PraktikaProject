@@ -7,7 +7,7 @@
     <Property Name="userID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="username" Type="nvarchar" MaxLength="50" />
     <Property Name="password" Type="nvarchar" MaxLength="50" />
-    <Property Name="isAdmin" Type="bit" />
+    <Property Name="isAdmin" Type="bit" Nullable="false" />
   </EntityType>
   <EntityContainer Name="UsersModelStoreContainer">
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
